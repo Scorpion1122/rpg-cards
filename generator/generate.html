@@ -6,9 +6,9 @@
     <!-- Library: jQuery -->
     <script type="text/javascript" src="lib/jquery/jquery.min.js" charset="utf-8"></script>
     <!-- Library: Bootstrap -->
-    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-theme.css" />
     <!-- Library: Bootstrap typeahead -->
     <script type="text/javascript" src="lib/typeahead/bootstrap3-typeahead.min.js" charset="utf-8"></script>
     <!-- Library: Color picker -->
@@ -39,14 +39,14 @@
     </script>
 </head>
 <body>
-    <div class="container-fluid">        
-        <div class="row">
-            <div class="col col-md-12">
+    <div class="container-fluid">   
+        <div class="row">  
+            <div class="col-lg-6 col-sm-6">
                 <!-- Help -->
                 <button type="button" class="btn btn-info" id="button-help" data-toggle="tooltip" data-placement="bottom" title="Help">
                         <span class="glyphicon glyphicon-question-sign"></span>
                 </button>
-                <div class="btn-group btn-group">
+                <div class="btn-group btn-group" role="group">
                     <!-- Load From File -->
                     <button type="button" class="btn btn-primary" id="button-load" data-toggle="tooltip" data-placement="bottom" title="Load Deck">
                             <span class="glyphicon glyphicon-cloud-upload"></span>
@@ -55,11 +55,17 @@
                     <button type="button" class="btn btn-primary" id="button-save" onclick="ui_save_file()" data-toggle="tooltip" data-placement="bottom" title="Save Deck">
                             <span class="glyphicon glyphicon-cloud-download"></span>
                     </button>
-                </div> 
+                </div>    
                 <!-- Generate -->       
                 <button type="button" class="btn btn-success" id="button-generate" data-toggle="tooltip" data-placement="bottom"  title="Generate Printable Data">
                         <span class="glyphicon glyphicon-print"></span>
-                </button>     
+                </button>         
+            </div>
+            <div class="col-lg-2 col-sm-6">    
+                <div class="btn-group btn-group">
+                    <button type="button" class="btn btn-primary" id="button-sort">Sort</button>
+                    <button type="button" class="btn btn-primary" id="button-filter">Map/Filter</button>
+                </div> 
             </div>
         </div>
         <div class="row">
