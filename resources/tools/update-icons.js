@@ -1,15 +1,18 @@
 const mv = require('mv');
 const fs = require('fs');
 const fse = require('fs-extra');
-const http = require('http');
+const https = require('https');
+const rootCas = require('ssl-root-cas/latest').create();
 const path = require('path');
 const walk = require('walk');
 const unzip = require('unzip');
 const child_process = require('child_process');
 const ncp = require('ncp');
+const urlParser = require('url');
 
-const gameIconsUrl = "http://game-icons.net/archives/png/zip/ffffff/000000/game-icons.net.png.zip";
-const tempFilePath = "./temp.zip";
+//const gameIconsUrl = "http://game-icons.net/archives/png/zip/ffffff/000000/game-icons.net.png.zip";
+const gameIconsUrl = "https://game-icons.net/archives/png/zip/ffffff/transparent/game-icons.net.png.zip";
+const tempFilePath = "./temp.txt";
 const tempDir = "./temp";
 const imgDir = "./generator/img";
 const customIconDir = "./resources/custom-icons";
@@ -22,10 +25,21 @@ const processIconsCmd = `mogrify -alpha copy -channel-fx "red=100%, blue=100%, g
 // ----------------------------------------------------------------------------
 // Download
 // ----------------------------------------------------------------------------
+//https://nodejs.org/api/https.html#https_https_request_options_callback
 function downloadFile(url, dest) {
     console.log("Downloading...");
+    https.globalAgent.options.ca = rootCas;
     return new Promise((resolve, reject) => {
-        http.get(url, response => {
+        var options = 
+        {
+            host: urlParser.parse(url).host,
+            path: urlParser.parse(url).path,
+            rejectUnauthorized: false, 
+        };
+
+        https.get(options, response => 
+        {
+            console.log(response.statusCode);
             const file = fs.createWriteStream(dest);
             response.pipe(file);
             file.on('close', resolve);
@@ -172,8 +186,8 @@ fse.emptyDir(tempDir)
 .then(() => unzipAll(tempFilePath, tempDir))
 .then(() => copyAll(tempDir, imgDir))
 .then(() => copyAll(customIconDir, imgDir))
-.then(() => processAll(imgDir))
+//.then(() => processAll(imgDir))
 .then(() => generateCSS(imgDir, cssPath))
 .then(() => generateJS(imgDir, jsPath))
 .then(() => console.log("Done."))
-.catch(err => cosole.log("Error", err));
+.catch(err => console.log("Error", err));
