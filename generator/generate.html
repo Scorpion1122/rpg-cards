@@ -31,15 +31,35 @@
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
+    <script>
+        //Initialize fancy tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </head>
 <body>
-    <div class="container-fluid">
-        <!--<h1 class="page-header">RPG card generator</h1>-->
+    <div class="container-fluid">        
         <div class="row">
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <strong>Note</strong>
-                Click on "Open help" to display some information about how to use this generator and what to do if you have a feature request or found a bug.
+            <div class="col col-md-12">
+                <!-- Help -->
+                <button type="button" class="btn btn-info" id="button-help" data-toggle="tooltip" data-placement="bottom" title="Help">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                </button>
+                <div class="btn-group btn-group">
+                    <!-- Load From File -->
+                    <button type="button" class="btn btn-primary" id="button-load" data-toggle="tooltip" data-placement="bottom" title="Load Deck">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                    </button>
+                    <!-- Save To File -->
+                    <button type="button" class="btn btn-primary" id="button-save" onclick="ui_save_file()" data-toggle="tooltip" data-placement="bottom" title="Save Deck">
+                            <span class="glyphicon glyphicon-cloud-download"></span>
+                    </button>
+                </div> 
+                <!-- Generate -->       
+                <button type="button" class="btn btn-success" id="button-generate" data-toggle="tooltip" data-placement="bottom"  title="Generate Printable Data">
+                        <span class="glyphicon glyphicon-print"></span>
+                </button>     
             </div>
         </div>
         <div class="row">
@@ -62,7 +82,10 @@
                             <button type="button" class="btn btn-primary btn-block" id="button-load-sample">Load sample</button>
                         </div>
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary btn-block" id="button-load">Load from file</button>
+                            <!-- Load From File -->
+                            <button type="button" class="btn btn-primary btn-block" id="button-load">
+                                    <span class="glyphicon glyphicon-cloud-upload"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -70,7 +93,10 @@
                             <button type="button" class="btn btn-primary btn-block" id="button-sort">Sort</button>
                         </div>
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary btn-block" id="button-save" onclick="ui_save_file()">Save to file</button>
+                            <!-- Save To File -->
+                            <button type="button" class="btn btn-primary btn-block" id="button-save" onclick="ui_save_file()">
+                                    <span class="glyphicon glyphicon-cloud-download"></span>
+                            </button>
                             <a href="" download="rpg_cards.json" id="file-save-link" style="display:none">Hidden download link</a>
                         </div>
                     </div>
